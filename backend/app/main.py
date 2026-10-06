@@ -9,7 +9,6 @@ from fastapi import (
 )
 
 from fastapi.middleware.cors import CORSMiddleware
-
 from pydantic import BaseModel
 
 from app.rag import RAGPipeline
@@ -29,10 +28,6 @@ app = FastAPI(
 # ==================================================
 # CORS
 # ==================================================
-#
-# Allows the React frontend running on localhost
-# to communicate with the FastAPI backend.
-#
 
 FRONTEND_URL = os.getenv(
     "FRONTEND_URL",
@@ -180,7 +175,7 @@ async def upload_document(
             )
 
         # ------------------------------------------
-        # Save file
+        # Save uploaded file
         # ------------------------------------------
 
         file_path.write_bytes(contents)
@@ -194,7 +189,7 @@ async def upload_document(
         )
 
         # ------------------------------------------
-        # Ingest document
+        # Ingest document into RAG pipeline
         # ------------------------------------------
 
         chunk_count = rag.ingest(
@@ -226,7 +221,10 @@ async def upload_document(
             repr(e)
         )
 
+        # ------------------------------------------
         # Remove partially uploaded file
+        # ------------------------------------------
+
         if file_path.exists():
             try:
                 file_path.unlink()
@@ -302,8 +300,11 @@ def chat(request: ChatRequest):
 
     question = request.question.strip()
 
-    if not question:
+    # ----------------------------------------------
+    # Validate question
+    # ----------------------------------------------
 
+    if not question:
         raise HTTPException(
             status_code=400,
             detail="Question cannot be empty."
@@ -315,10 +316,18 @@ def chat(request: ChatRequest):
             f"Question received: {question}"
         )
 
+        # ------------------------------------------
+        # Ask RAG pipeline
+        # ------------------------------------------
+
         result = rag.ask(
             question,
             request.history
         )
+
+        # ------------------------------------------
+        # Return answer + sources
+        # ------------------------------------------
 
         return {
             "answer": result["answer"],
@@ -349,6 +358,10 @@ def delete_document(
     filename: str
 ):
 
+    # ----------------------------------------------
+    # Prevent unsafe path names
+    # ----------------------------------------------
+
     safe_filename = Path(
         filename
     ).name
@@ -372,7 +385,7 @@ def delete_document(
     try:
 
         # ------------------------------------------
-        # Delete vectors
+        # Delete vectors from ChromaDB
         # ------------------------------------------
 
         rag.vector_store.delete_document(
