@@ -1,0 +1,81 @@
+DOCUMIND TEST DOCUMENT
+
+1. Introduction
+
+DocuMind is a retrieval augmented generation chatbot designed
+to answer questions from user-uploaded documents.
+
+The application uses a Retrieval Augmented Generation architecture
+to combine document retrieval with language model generation.
+
+2. Supported Files
+
+DocuMind supports three document formats.
+
+The supported file types are:
+
+PDF
+DOCX
+TXT
+
+Users can upload these files through the DocuMind application.
+
+3. Vector Database
+
+DocuMind uses ChromaDB as its local vector database.
+
+Document chunks are converted into vector embeddings before
+being stored in ChromaDB.
+
+ChromaDB is responsible for storing the embeddings and retrieving
+the most relevant document chunks when the user asks a question.
+
+4. Embeddings
+
+DocuMind uses the all-MiniLM-L6-v2 sentence transformer model
+to generate embeddings.
+
+The embedding model converts text into numerical vectors.
+
+These vectors allow the system to perform semantic similarity
+search.
+
+5. Retrieval
+
+When a user asks a question, DocuMind converts the question into
+an embedding.
+
+The embedding is compared against document embeddings stored
+in ChromaDB.
+
+The system retrieves the most relevant document chunks.
+
+6. Hallucination Reduction
+
+DocuMind is designed to reduce hallucinations by instructing the
+language model to answer only from the retrieved document context.
+
+The system should not invent information that does not exist
+in the uploaded documents.
+
+If the required information cannot be found in the documents,
+DocuMind should tell the user that the information cannot be found.
+
+7. Architecture
+
+The DocuMind pipeline consists of document loading, text
+chunking, embedding generation, vector storage, retrieval,
+context construction and language model generation.
+
+8. Development
+
+DocuMind is being developed using Python and FastAPI for the
+backend and React with Tailwind CSS for the frontend.
+
+The project can be deployed using Docker.
+
+9. Future Features
+
+Future versions of DocuMind may include conversation memory,
+streaming responses, retrieval evaluation, confidence scores,
+rate limiting and support for multiple language model providers.

@@ -1,0 +1,110 @@
+[
+    {
+        "id": 1,
+        "question": "What vector database does DocuMind use?",
+        "type": "supported",
+        "expected_keywords": [
+            "ChromaDB"
+        ]
+    },
+    {
+        "id": 2,
+        "question": "What embedding model does DocuMind use?",
+        "type": "supported",
+        "expected_keywords": [
+            "all-MiniLM-L6-v2"
+        ]
+    },
+    {
+        "id": 3,
+        "question": "What file formats are supported by DocuMind?",
+        "type": "supported",
+        "expected_keywords": [
+            "PDF",
+            "DOCX",
+            "TXT"
+        ]
+    },
+    {
+        "id": 4,
+        "question": "How does DocuMind retrieve documents?",
+        "type": "supported",
+        "expected_keywords": [
+            "embedding",
+            "ChromaDB",
+            "document chunks"
+        ]
+    },
+    {
+        "id": 5,
+        "question": "How does DocuMind reduce hallucinations?",
+        "type": "supported",
+        "expected_keywords": [
+            "retrieved",
+            "document context",
+            "not invent"
+        ]
+    },
+    {
+        "id": 6,
+        "question": "What are the main stages of the DocuMind pipeline?",
+        "type": "supported",
+        "expected_keywords": [
+            "loading",
+            "chunking",
+            "embedding",
+            "vector storage",
+            "retrieval"
+        ]
+    },
+    {
+        "id": 7,
+        "question": "What technology is used for the DocuMind backend?",
+        "type": "supported",
+        "expected_keywords": [
+            "Python",
+            "FastAPI"
+        ]
+    },
+    {
+        "id": 8,
+        "question": "What technology is used for the DocuMind frontend?",
+        "type": "supported",
+        "expected_keywords": [
+            "React",
+            "Tailwind"
+        ]
+    },
+    {
+        "id": 9,
+        "question": "Who created DocuMind?",
+        "type": "unsupported",
+        "expected_keywords": [],
+        "max_expected_distance": 1.0
+    },
+    {
+        "id": 10,
+        "question": "What is the capital of France?",
+        "type": "off_topic",
+        "expected_keywords": [],
+        "min_expected_distance": 1.0
+    },
+    {
+        "id": 11,
+        "question": "Write a Python program to sort an array.",
+        "type": "off_topic",
+        "expected_keywords": [],
+        "min_expected_distance": 1.0
+    },
+    {
+        "id": 12,
+        "question": "What future features are planned for DocuMind?",
+        "type": "supported",
+        "expected_keywords": [
+            "conversation memory",
+            "streaming",
+            "retrieval evaluation",
+            "confidence scores"
+        ]
+    }
+]

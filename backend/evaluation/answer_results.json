@@ -1,0 +1,282 @@
+{
+    "total_questions": 12,
+    "passed": 12,
+    "failed": 0,
+    "overall_answer_accuracy": 100.0,
+    "supported_answer_accuracy": 100.0,
+    "unsupported_answer_accuracy": 100.0,
+    "off_topic_answer_accuracy": 100.0,
+    "results": [
+        {
+            "id": 1,
+            "question": "What vector database does DocuMind use?",
+            "type": "supported",
+            "answer": "DocuMind uses ChromaDB as its local vector database.",
+            "expected_keywords": [
+                "ChromaDB"
+            ],
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 0.7699486017227173
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 0.8544998168945312
+                }
+            ],
+            "passed": true
+        },
+        {
+            "id": 2,
+            "question": "What embedding model does DocuMind use?",
+            "type": "supported",
+            "answer": "DocuMind uses the all-MiniLM-L6-v2 sentence transformer model to generate embeddings.",
+            "expected_keywords": [
+                "all-MiniLM-L6-v2"
+            ],
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 0.6712081432342529
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 1,
+                    "distance": 0.6761521697044373
+                }
+            ],
+            "passed": true
+        },
+        {
+            "id": 3,
+            "question": "What file formats are supported by DocuMind?",
+            "type": "supported",
+            "answer": "DocuMind supports three document formats: PDF, DOCX, and TXT.",
+            "expected_keywords": [
+                "PDF",
+                "DOCX",
+                "TXT"
+            ],
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 0.7708945870399475
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 0.7768766283988953
+                }
+            ],
+            "passed": true
+        },
+        {
+            "id": 4,
+            "question": "How does DocuMind retrieve documents?",
+            "type": "supported",
+            "answer": "When a user asks a question, DocuMind converts the question into an embedding. The embedding is compared against document embeddings stored in ChromaDB. The system then retrieves the most relevant document chunks.",
+            "expected_keywords": [
+                "embedding",
+                "ChromaDB",
+                "document chunks"
+            ],
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 0.776533305644989
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 1,
+                    "distance": 0.8395110368728638
+                }
+            ],
+            "passed": true
+        },
+        {
+            "id": 5,
+            "question": "How does DocuMind reduce hallucinations?",
+            "type": "supported",
+            "answer": "hallucination reduction documind is designed to reduce hallucinations by instructing the language model to answer only from the retrieved document context. the system should not invent information that does not exist in the uploaded documents.",
+            "expected_keywords": [
+                "retrieved",
+                "document context",
+                "not invent"
+            ],
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 1,
+                    "distance": 1.3225831985473633
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 1.4731532335281372
+                }
+            ],
+            "passed": true
+        },
+        {
+            "id": 6,
+            "question": "What are the main stages of the DocuMind pipeline?",
+            "type": "supported",
+            "answer": "architecture the documind pipeline consists of document loading, text chunking, embedding generation, vector storage, retrieval, context construction and language model generation. future features future versions of documind may include conversation memory, streaming responses, retrieval evaluation, confidence scores, rate limiting and support for multiple language model providers.",
+            "expected_keywords": [
+                "loading",
+                "chunking",
+                "embedding",
+                "vector storage",
+                "retrieval"
+            ],
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 0.8756504058837891
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 1,
+                    "distance": 1.2012872695922852
+                }
+            ],
+            "passed": true
+        },
+        {
+            "id": 7,
+            "question": "What technology is used for the DocuMind backend?",
+            "type": "supported",
+            "answer": "development documind is being developed using python and fastapi for the backend and react with tailwind css for the frontend.",
+            "expected_keywords": [
+                "Python",
+                "FastAPI"
+            ],
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 0.6596527099609375
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 0.9347435235977173
+                }
+            ],
+            "passed": true
+        },
+        {
+            "id": 8,
+            "question": "What technology is used for the DocuMind frontend?",
+            "type": "supported",
+            "answer": "development documind is being developed using python and fastapi for the backend and react with tailwind css for the frontend.",
+            "expected_keywords": [
+                "React",
+                "Tailwind"
+            ],
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 0.7187024354934692
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 1.0126776695251465
+                }
+            ],
+            "passed": true
+        },
+        {
+            "id": 9,
+            "question": "Who created DocuMind?",
+            "type": "unsupported",
+            "answer": "I could not find this information in the uploaded documents.",
+            "expected_keywords": [],
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 0.8797563314437866
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 1.208081841468811
+                }
+            ],
+            "passed": true
+        },
+        {
+            "id": 10,
+            "question": "What is the capital of France?",
+            "type": "off_topic",
+            "answer": "I could not find this information in the uploaded documents.",
+            "expected_keywords": [],
+            "sources": [],
+            "passed": true
+        },
+        {
+            "id": 11,
+            "question": "Write a Python program to sort an array.",
+            "type": "off_topic",
+            "answer": "I could not find this information in the uploaded documents.",
+            "expected_keywords": [],
+            "sources": [],
+            "passed": true
+        },
+        {
+            "id": 12,
+            "question": "What future features are planned for DocuMind?",
+            "type": "supported",
+            "answer": "future features future versions of documind may include conversation memory, streaming responses, retrieval evaluation, confidence scores, rate limiting and support for multiple language model providers.",
+            "expected_keywords": [
+                "conversation memory",
+                "streaming",
+                "retrieval evaluation",
+                "confidence scores"
+            ],
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 0.6635828018188477
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 1.043459415435791
+                }
+            ],
+            "passed": true
+        }
+    ]
+}

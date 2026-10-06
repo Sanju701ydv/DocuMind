@@ -1,0 +1,392 @@
+{
+    "total_questions": 12,
+    "passed": 12,
+    "failed": 0,
+    "overall_accuracy": 100.0,
+    "supported_question_accuracy": 100.0,
+    "unsupported_question_accuracy": 100.0,
+    "off_topic_accuracy": 100.0,
+    "results": [
+        {
+            "id": 1,
+            "question": "What vector database does DocuMind use?",
+            "type": "supported",
+            "best_distance": 0.7699486017227173,
+            "matched_keywords": [
+                "ChromaDB"
+            ],
+            "missing_keywords": [],
+            "passed": true,
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 0.7699486017227173
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 0.8544998168945312
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 1,
+                    "distance": 0.9634683132171631
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "question": "What embedding model does DocuMind use?",
+            "type": "supported",
+            "best_distance": 0.6712081432342529,
+            "matched_keywords": [
+                "all-MiniLM-L6-v2"
+            ],
+            "missing_keywords": [],
+            "passed": true,
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 0.6712081432342529
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 1,
+                    "distance": 0.6761521697044373
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 0.6796261072158813
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "question": "What file formats are supported by DocuMind?",
+            "type": "supported",
+            "best_distance": 0.7708945870399475,
+            "matched_keywords": [
+                "PDF",
+                "DOCX",
+                "TXT"
+            ],
+            "missing_keywords": [],
+            "passed": true,
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 0.7708945870399475
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 0.7768766283988953
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 1,
+                    "distance": 0.994085431098938
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "question": "How does DocuMind retrieve documents?",
+            "type": "supported",
+            "best_distance": 0.776533305644989,
+            "matched_keywords": [
+                "embedding",
+                "ChromaDB",
+                "document chunks"
+            ],
+            "missing_keywords": [],
+            "passed": true,
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 0.776533305644989
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 1,
+                    "distance": 0.8395110368728638
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 0.8756971955299377
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "question": "How does DocuMind reduce hallucinations?",
+            "type": "supported",
+            "best_distance": 1.3225831985473633,
+            "matched_keywords": [
+                "retrieved",
+                "document context",
+                "not invent"
+            ],
+            "missing_keywords": [],
+            "passed": true,
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 1,
+                    "distance": 1.3225831985473633
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 1.4731532335281372
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 1.6000319719314575
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "question": "What are the main stages of the DocuMind pipeline?",
+            "type": "supported",
+            "best_distance": 0.8756504058837891,
+            "matched_keywords": [
+                "loading",
+                "chunking",
+                "embedding",
+                "vector storage",
+                "retrieval"
+            ],
+            "missing_keywords": [],
+            "passed": true,
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 0.8756504058837891
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 1,
+                    "distance": 1.2012872695922852
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 1.3606621026992798
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "question": "What technology is used for the DocuMind backend?",
+            "type": "supported",
+            "best_distance": 0.6596527099609375,
+            "matched_keywords": [
+                "Python",
+                "FastAPI"
+            ],
+            "missing_keywords": [],
+            "passed": true,
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 0.6596527099609375
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 0.9347435235977173
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 1,
+                    "distance": 1.0639991760253906
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "question": "What technology is used for the DocuMind frontend?",
+            "type": "supported",
+            "best_distance": 0.7187024354934692,
+            "matched_keywords": [
+                "React",
+                "Tailwind"
+            ],
+            "missing_keywords": [],
+            "passed": true,
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 0.7187024354934692
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 1.0126776695251465
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 1,
+                    "distance": 1.1456598043441772
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "question": "Who created DocuMind?",
+            "type": "unsupported",
+            "best_distance": 0.8797563314437866,
+            "matched_keywords": [],
+            "missing_keywords": [],
+            "passed": true,
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 0.8797563314437866
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 1.208081841468811
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 1,
+                    "distance": 1.2424752712249756
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "question": "What is the capital of France?",
+            "type": "off_topic",
+            "best_distance": 1.952034831047058,
+            "matched_keywords": [],
+            "missing_keywords": [],
+            "passed": true,
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 1.952034831047058
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 2.068524122238159
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 1,
+                    "distance": 2.0785114765167236
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "question": "Write a Python program to sort an array.",
+            "type": "off_topic",
+            "best_distance": 1.924057960510254,
+            "matched_keywords": [],
+            "missing_keywords": [],
+            "passed": true,
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 1.924057960510254
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 1.9470181465148926
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 1,
+                    "distance": 2.0334558486938477
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "question": "What future features are planned for DocuMind?",
+            "type": "supported",
+            "best_distance": 0.6635828018188477,
+            "matched_keywords": [
+                "conversation memory",
+                "streaming",
+                "retrieval evaluation",
+                "confidence scores"
+            ],
+            "missing_keywords": [],
+            "passed": true,
+            "sources": [
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 2,
+                    "distance": 0.6635828018188477
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 0,
+                    "distance": 1.043459415435791
+                },
+                {
+                    "filename": "test.txt",
+                    "page": null,
+                    "chunk_id": 1,
+                    "distance": 1.0859723091125488
+                }
+            ]
+        }
+    ]
+}
