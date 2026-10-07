@@ -1,57 +1,78 @@
-from sentence_transformers import SentenceTransformer
+import re
 
-from app.config import CHUNK_SIZE, CHUNK_OVERLAP
+from app.config import (
+    CHUNK_SIZE,
+    CHUNK_OVERLAP
+)
 
 
 class DocumentChunker:
 
-    def __init__(self, model_name):
-        self.model = SentenceTransformer(model_name)
-        self.tokenizer = self.model.tokenizer
+    def __init__(self, model_name=None):
+
+        # model_name is kept in the constructor so that
+        # the existing RAGPipeline does not need to change.
+        self.model_name = model_name
 
     def count_tokens(self, text):
-        tokens = self.tokenizer.encode(
-            text,
-            add_special_tokens=False
+
+        # Lightweight approximation of token count.
+        # This avoids loading a tokenizer/model.
+        words = re.findall(
+            r"\S+",
+            text
         )
 
-        return len(tokens)
+        return len(words)
 
     def chunk_text(self, text):
-        tokens = self.tokenizer.encode(
-            text,
-            add_special_tokens=False
+
+        # Convert text into words.
+        words = re.findall(
+            r"\S+",
+            text
         )
+
+        if not words:
+            return []
 
         chunks = []
 
         start = 0
 
-        while start < len(tokens):
+        while start < len(words):
 
             end = min(
                 start + CHUNK_SIZE,
-                len(tokens)
+                len(words)
             )
 
-            chunk_tokens = tokens[start:end]
+            chunk_words = words[start:end]
 
-            chunk_text = self.tokenizer.decode(
-                chunk_tokens,
-                skip_special_tokens=True
+            chunk_text = " ".join(
+                chunk_words
             )
 
             if chunk_text.strip():
-                chunks.append(chunk_text.strip())
+                chunks.append(
+                    chunk_text.strip()
+                )
 
-            if end >= len(tokens):
+            if end >= len(words):
                 break
 
-            start = end - CHUNK_OVERLAP
+            start = max(
+                end - CHUNK_OVERLAP,
+                start + 1
+            )
 
         return chunks
 
-    def create_chunks(self, pages, filename):
+    def create_chunks(
+        self,
+        pages,
+        filename
+    ):
 
         all_chunks = []
 
@@ -66,8 +87,13 @@ class DocumentChunker:
             for chunk in page_chunks:
 
                 all_chunks.append({
-                    "id": f"{filename}_{chunk_id}",
+                    "id": (
+                        f"{filename}_"
+                        f"{chunk_id}"
+                    ),
+
                     "text": chunk,
+
                     "metadata": {
                         "filename": filename,
                         "page": page["page"],

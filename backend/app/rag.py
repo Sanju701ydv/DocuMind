@@ -17,7 +17,9 @@ class RAGPipeline:
 
     def __init__(self):
 
-        print("Initializing DocuMind RAG pipeline...")
+        print(
+            "Initializing DocuMind RAG pipeline..."
+        )
 
         self.chunker = DocumentChunker(
             EMBEDDING_MODEL
@@ -29,8 +31,9 @@ class RAGPipeline:
 
         self.llm = LLM()
 
-        print("DocuMind RAG pipeline ready.")
-
+        print(
+            "DocuMind RAG pipeline ready."
+        )
 
     # ==================================================
     # INGEST DOCUMENT
@@ -51,29 +54,31 @@ class RAGPipeline:
             f"Loading document: {filename}"
         )
 
-        # ----------------------------------------------
-        # Delete old chunks for same document
-        # ----------------------------------------------
-
+        # Remove old chunks for this document
+        # before inserting the new version.
         try:
+
             self.vector_store.delete_by_filename(
                 filename
             )
+
         except Exception as e:
+
             print(
                 "Warning while deleting old chunks:",
                 e
             )
 
-        # ----------------------------------------------
-        # Load document
-        # ----------------------------------------------
+        # --------------------------------------------------
+        # LOAD
+        # --------------------------------------------------
 
         pages = load_document(
             str(file_path)
         )
 
         if not pages:
+
             raise ValueError(
                 "No readable text was found in the document."
             )
@@ -82,9 +87,9 @@ class RAGPipeline:
             f"Loaded {len(pages)} page/section(s)."
         )
 
-        # ----------------------------------------------
-        # Create chunks
-        # ----------------------------------------------
+        # --------------------------------------------------
+        # CHUNK
+        # --------------------------------------------------
 
         chunks = self.chunker.create_chunks(
             pages,
@@ -92,17 +97,19 @@ class RAGPipeline:
         )
 
         if not chunks:
+
             raise ValueError(
-                "No text chunks could be created from the document."
+                "No text chunks could be created "
+                "from the document."
             )
 
         print(
             f"Created {len(chunks)} chunks."
         )
 
-        # ----------------------------------------------
-        # Generate embeddings
-        # ----------------------------------------------
+        # --------------------------------------------------
+        # EMBEDDINGS
+        # --------------------------------------------------
 
         texts = [
             chunk["text"]
@@ -110,7 +117,7 @@ class RAGPipeline:
         ]
 
         print(
-            "Generating embeddings..."
+            "Generating lightweight embeddings..."
         )
 
         embeddings = (
@@ -119,9 +126,9 @@ class RAGPipeline:
             )
         )
 
-        # ----------------------------------------------
-        # Store in ChromaDB
-        # ----------------------------------------------
+        # --------------------------------------------------
+        # VECTOR STORAGE
+        # --------------------------------------------------
 
         print(
             "Storing chunks in ChromaDB..."
@@ -138,9 +145,8 @@ class RAGPipeline:
 
         return len(chunks)
 
-
     # ==================================================
-    # NORMALIZE WORD
+    # WORD NORMALIZATION
     # ==================================================
 
     def normalize_word(self, word):
@@ -148,16 +154,131 @@ class RAGPipeline:
         word = word.lower().strip()
 
         if word.endswith("ies"):
-            return word[:-3] + "y"
 
-        if word.endswith("s") and not word.endswith("ss"):
+            return (
+                word[:-3] + "y"
+            )
+
+        if (
+            word.endswith("s")
+            and not word.endswith("ss")
+        ):
+
             return word[:-1]
 
         return word
 
+    # ==================================================
+    # QUESTION TYPE CHECK
+    # ==================================================
+
+    def is_clearly_off_topic(
+        self,
+        question
+    ):
+        """
+        Detect requests that ask DocuMind to perform
+        a programming/task operation instead of answering
+        from uploaded documents.
+        """
+
+        question_text = (
+            question.lower().strip()
+        )
+
+        task_phrases = [
+
+            "write a program",
+
+            "write python code",
+
+            "write code",
+
+            "generate code",
+
+            "create a program",
+
+            "make a program",
+
+            "solve this coding problem",
+
+            "code for",
+
+            "program to",
+
+            "python program",
+
+            "implement",
+
+            "write an algorithm",
+
+            "generate an algorithm"
+
+        ]
+
+        for phrase in task_phrases:
+
+            if phrase in question_text:
+
+                return True
+
+        return False
 
     # ==================================================
-    # QUESTION SUPPORT CHECK
+    # QUERY EXPANSION
+    # ==================================================
+
+    def expand_query(
+        self,
+        question
+    ):
+        """
+        Expand broad architecture/pipeline questions
+        with important document terms.
+
+        This improves retrieval when using the lightweight
+        HashingVectorizer embedding model.
+        """
+
+        question_text = (
+            question.lower().strip()
+        )
+
+        pipeline_question = (
+
+            "main stages" in question_text
+
+            or "pipeline stages" in question_text
+
+            or "stages of the pipeline" in question_text
+
+            or "documind pipeline" in question_text
+
+            or "pipeline" in question_text
+
+            or "architecture" in question_text
+
+        )
+
+        if pipeline_question:
+
+            return (
+                question
+                + " "
+                + "document loading "
+                + "text chunking "
+                + "embedding generation "
+                + "vector storage "
+                + "retrieval "
+                + "context construction "
+                + "language model generation "
+                + "architecture stages"
+            )
+
+        return question
+
+    # ==================================================
+    # DOCUMENT SUPPORT CHECK
     # ==================================================
 
     def has_question_support(
@@ -167,129 +288,270 @@ class RAGPipeline:
     ):
 
         if not retrieved:
+
             return False
 
-        question_text = question.lower()
-
-        retrieved_text = " ".join(
-            item["text"].lower()
-            for item in retrieved
+        question_text = (
+            question.lower()
         )
 
-        # ----------------------------------------------
-        # Direct keyword matching
-        # ----------------------------------------------
+        # Explicit off-topic protection
+        if self.is_clearly_off_topic(
+            question
+        ):
+
+            return False
+
+        retrieved_text = " ".join(
+
+            item["text"].lower()
+
+            for item in retrieved
+
+        )
+
+        # --------------------------------------------------
+        # PIPELINE / ARCHITECTURE QUESTIONS
+        # --------------------------------------------------
+
+        pipeline_phrases = [
+
+            "main stages",
+
+            "stages of the pipeline",
+
+            "pipeline stages",
+
+            "architecture",
+
+            "how does the pipeline work",
+
+            "pipeline consists",
+
+            "documind pipeline"
+
+        ]
+
+        if any(
+            phrase in question_text
+            for phrase in pipeline_phrases
+        ):
+
+            architecture_terms = [
+
+                "loading",
+
+                "chunking",
+
+                "embedding",
+
+                "vector storage",
+
+                "retrieval",
+
+                "context",
+
+                "generation"
+
+            ]
+
+            matches = sum(
+
+                1
+
+                for term in architecture_terms
+
+                if term in retrieved_text
+
+            )
+
+            # Architecture questions need multiple
+            # pieces of evidence rather than one keyword.
+
+            if matches >= 2:
+
+                return True
+
+        # --------------------------------------------------
+        # DIRECT WORD MATCH
+        # --------------------------------------------------
 
         question_words = [
+
             self.normalize_word(word)
+
             for word in question_text.split()
+
             if len(word) > 3
+
         ]
 
         direct_matches = 0
 
         for word in question_words:
 
-            normalized_text = self.normalize_word(
-                word
+            normalized_word = (
+                self.normalize_word(word)
             )
 
-            if normalized_text in retrieved_text:
+            if normalized_word in retrieved_text:
+
                 direct_matches += 1
 
         if direct_matches >= 1:
+
             return True
 
-        # ----------------------------------------------
-        # Conceptual matching
-        # ----------------------------------------------
+        # --------------------------------------------------
+        # CONCEPTUAL GROUPS
+        # --------------------------------------------------
 
         conceptual_groups = {
 
             "hallucination": [
+
                 "hallucination",
+
                 "invent",
+
                 "retrieved",
+
                 "document context",
+
                 "cannot be found"
+
             ],
 
             "retrieval": [
+
                 "retrieval",
+
                 "retrieve",
+
                 "embedding",
+
                 "similarity",
+
                 "relevant",
+
                 "chunks"
+
             ],
 
             "embedding": [
+
                 "embedding",
+
                 "vector",
+
                 "sentence transformer"
+
             ],
 
             "architecture": [
+
                 "loading",
+
                 "chunking",
+
                 "embedding",
+
                 "storage",
+
                 "retrieval",
+
                 "context",
+
                 "generation"
+
             ],
 
             "file": [
+
                 "pdf",
+
                 "docx",
+
                 "txt",
+
                 "document formats"
+
             ]
+
         }
 
-        for concept, evidence_terms in conceptual_groups.items():
+        for concept, evidence_terms in (
+            conceptual_groups.items()
+        ):
 
-            concept_present = (
-                concept in question_text
-            )
+            if concept not in question_text:
 
-            if not concept_present:
                 continue
 
             evidence_matches = sum(
+
                 1
+
                 for term in evidence_terms
+
                 if term in retrieved_text
+
             )
 
             if evidence_matches >= 2:
+
                 return True
 
         return False
-
 
     # ==================================================
     # RELEVANCE CHECK
     # ==================================================
 
-    def is_relevant(self, retrieved):
+    def is_relevant(
+        self,
+        retrieved
+    ):
 
         if not retrieved:
+
+            return False
+
+        valid_distances = [
+
+            item["distance"]
+
+            for item in retrieved
+
+            if item["distance"] is not None
+
+        ]
+
+        if not valid_distances:
+
             return False
 
         best_distance = min(
-            item["distance"]
-            for item in retrieved
+            valid_distances
+        )
+
+        print(
+            f"Best retrieval distance: "
+            f"{best_distance:.4f}"
+        )
+
+        print(
+            f"Distance threshold: "
+            f"{DISTANCE_THRESHOLD:.4f}"
         )
 
         return (
-            best_distance <=
-            DISTANCE_THRESHOLD
+            best_distance
+            <= DISTANCE_THRESHOLD
         )
 
-
     # ==================================================
-    # STRONG SUPPORT CHECK
+    # STRONG SUPPORT
     # ==================================================
 
     def is_strongly_supported(
@@ -303,9 +565,8 @@ class RAGPipeline:
             retrieved
         )
 
-
     # ==================================================
-    # SHOULD REJECT
+    # REJECTION LOGIC
     # ==================================================
 
     def should_reject(
@@ -314,25 +575,38 @@ class RAGPipeline:
         retrieved
     ):
 
-        if not retrieved:
+        # Programming/task requests are always rejected
+        # because DocuMind answers from uploaded documents.
+
+        if self.is_clearly_off_topic(
+            question
+        ):
+
             return True
 
-        # Strong textual support should be allowed
-        # even if semantic distance is slightly high.
+        if not retrieved:
+
+            return True
+
+        # If the retrieved context clearly supports
+        # the question, allow the LLM to answer.
 
         if self.is_strongly_supported(
             question,
             retrieved
         ):
+
             return False
+
+        # Otherwise use the vector similarity threshold.
 
         if self.is_relevant(
             retrieved
         ):
+
             return False
 
         return True
-
 
     # ==================================================
     # RETRIEVE
@@ -343,11 +617,39 @@ class RAGPipeline:
         question
     ):
 
-        query_embedding = (
-            self.embedding_model.embed_query(
+        # --------------------------------------------------
+        # EXPAND QUERY BEFORE EMBEDDING
+        # --------------------------------------------------
+
+        expanded_question = (
+            self.expand_query(
                 question
             )
         )
+
+        if expanded_question != question:
+
+            print(
+                "Expanded retrieval query:"
+            )
+
+            print(
+                expanded_question
+            )
+
+        # --------------------------------------------------
+        # CREATE QUERY EMBEDDING
+        # --------------------------------------------------
+
+        query_embedding = (
+            self.embedding_model.embed_query(
+                expanded_question
+            )
+        )
+
+        # --------------------------------------------------
+        # SEARCH CHROMADB
+        # --------------------------------------------------
 
         results = (
             self.vector_store.search(
@@ -378,25 +680,36 @@ class RAGPipeline:
         ):
 
             metadata = (
+
                 metadatas[index]
+
                 if index < len(metadatas)
+
                 else {}
+
             )
 
             distance = (
+
                 distances[index]
+
                 if index < len(distances)
+
                 else None
+
             )
 
             retrieved.append({
+
                 "text": documents[index],
+
                 "metadata": metadata,
+
                 "distance": distance
+
             })
 
         return retrieved
-
 
     # ==================================================
     # ASK
@@ -408,13 +721,36 @@ class RAGPipeline:
         history=None
     ):
 
+        # --------------------------------------------------
+        # OFF-TOPIC CHECK
+        # --------------------------------------------------
+
+        if self.is_clearly_off_topic(
+            question
+        ):
+
+            return {
+
+                "answer": (
+                    "I could not find this information "
+                    "in the uploaded documents."
+                ),
+
+                "sources": []
+
+            }
+
+        # --------------------------------------------------
+        # RETRIEVE
+        # --------------------------------------------------
+
         retrieved = self.retrieve(
             question
         )
 
-        # ----------------------------------------------
-        # Reject unsupported questions
-        # ----------------------------------------------
+        # --------------------------------------------------
+        # REJECTION CHECK
+        # --------------------------------------------------
 
         if self.should_reject(
             question,
@@ -422,26 +758,33 @@ class RAGPipeline:
         ):
 
             return {
+
                 "answer": (
                     "I could not find this information "
                     "in the uploaded documents."
                 ),
+
                 "sources": []
+
             }
 
-        # ----------------------------------------------
-        # Generate answer
-        # ----------------------------------------------
+        # --------------------------------------------------
+        # GENERATE ANSWER
+        # --------------------------------------------------
 
         answer = self.llm.generate(
+
             question=question,
+
             retrieved=retrieved,
+
             history=history or []
+
         )
 
-        # ----------------------------------------------
-        # Sources
-        # ----------------------------------------------
+        # --------------------------------------------------
+        # BUILD SOURCES
+        # --------------------------------------------------
 
         sources = []
 
@@ -459,15 +802,23 @@ class RAGPipeline:
             relevance = None
 
             if distance is not None:
+
                 relevance = max(
+
                     0,
+
                     min(
+
                         100,
+
                         (1 - distance) * 100
+
                     )
+
                 )
 
             sources.append({
+
                 "filename": metadata.get(
                     "filename",
                     "Unknown"
@@ -484,9 +835,17 @@ class RAGPipeline:
                 "distance": distance,
 
                 "relevance": relevance
+
             })
 
+        # --------------------------------------------------
+        # RETURN
+        # --------------------------------------------------
+
         return {
+
             "answer": answer,
+
             "sources": sources
+
         }

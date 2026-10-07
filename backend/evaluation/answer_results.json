@@ -11,7 +11,7 @@
             "id": 1,
             "question": "What vector database does DocuMind use?",
             "type": "supported",
-            "answer": "DocuMind uses ChromaDB as its local vector database.",
+            "answer": "Vector Database DocuMind uses ChromaDB as its local vector database.",
             "expected_keywords": [
                 "ChromaDB"
             ],
@@ -20,13 +20,15 @@
                     "filename": "test.txt",
                     "page": null,
                     "chunk_id": 0,
-                    "distance": 0.7699486017227173
+                    "distance": 1.580754280090332,
+                    "relevance": 0
                 },
                 {
                     "filename": "test.txt",
                     "page": null,
-                    "chunk_id": 2,
-                    "distance": 0.8544998168945312
+                    "chunk_id": 1,
+                    "distance": 1.665633201599121,
+                    "relevance": 0
                 }
             ],
             "passed": true
@@ -35,7 +37,7 @@
             "id": 2,
             "question": "What embedding model does DocuMind use?",
             "type": "supported",
-            "answer": "DocuMind uses the all-MiniLM-L6-v2 sentence transformer model to generate embeddings.",
+            "answer": "Embeddings DocuMind uses the all-MiniLM-L6-v2 sentence transformer model to generate embeddings.",
             "expected_keywords": [
                 "all-MiniLM-L6-v2"
             ],
@@ -43,14 +45,16 @@
                 {
                     "filename": "test.txt",
                     "page": null,
-                    "chunk_id": 0,
-                    "distance": 0.6712081432342529
+                    "chunk_id": 1,
+                    "distance": 1.4798738956451416,
+                    "relevance": 0
                 },
                 {
                     "filename": "test.txt",
                     "page": null,
-                    "chunk_id": 1,
-                    "distance": 0.6761521697044373
+                    "chunk_id": 0,
+                    "distance": 1.5162549018859863,
+                    "relevance": 0
                 }
             ],
             "passed": true
@@ -69,14 +73,16 @@
                 {
                     "filename": "test.txt",
                     "page": null,
-                    "chunk_id": 2,
-                    "distance": 0.7708945870399475
+                    "chunk_id": 0,
+                    "distance": 1.522281527519226,
+                    "relevance": 0
                 },
                 {
                     "filename": "test.txt",
                     "page": null,
-                    "chunk_id": 0,
-                    "distance": 0.7768766283988953
+                    "chunk_id": 1,
+                    "distance": 1.7936241626739502,
+                    "relevance": 0
                 }
             ],
             "passed": true
@@ -95,14 +101,16 @@
                 {
                     "filename": "test.txt",
                     "page": null,
-                    "chunk_id": 0,
-                    "distance": 0.776533305644989
+                    "chunk_id": 1,
+                    "distance": 1.6337194442749023,
+                    "relevance": 0
                 },
                 {
                     "filename": "test.txt",
                     "page": null,
-                    "chunk_id": 1,
-                    "distance": 0.8395110368728638
+                    "chunk_id": 0,
+                    "distance": 1.646722674369812,
+                    "relevance": 0
                 }
             ],
             "passed": true
@@ -111,7 +119,7 @@
             "id": 5,
             "question": "How does DocuMind reduce hallucinations?",
             "type": "supported",
-            "answer": "hallucination reduction documind is designed to reduce hallucinations by instructing the language model to answer only from the retrieved document context. the system should not invent information that does not exist in the uploaded documents.",
+            "answer": "Hallucination Reduction DocuMind is designed to reduce hallucinations by instructing the language model to answer only from the retrieved document context. The system should not invent information that does not exist in the uploaded documents.",
             "expected_keywords": [
                 "retrieved",
                 "document context",
@@ -121,14 +129,16 @@
                 {
                     "filename": "test.txt",
                     "page": null,
-                    "chunk_id": 1,
-                    "distance": 1.3225831985473633
+                    "chunk_id": 0,
+                    "distance": 1.6113951206207275,
+                    "relevance": 0
                 },
                 {
                     "filename": "test.txt",
                     "page": null,
-                    "chunk_id": 2,
-                    "distance": 1.4731532335281372
+                    "chunk_id": 1,
+                    "distance": 1.6337192058563232,
+                    "relevance": 0
                 }
             ],
             "passed": true
@@ -137,7 +147,7 @@
             "id": 6,
             "question": "What are the main stages of the DocuMind pipeline?",
             "type": "supported",
-            "answer": "architecture the documind pipeline consists of document loading, text chunking, embedding generation, vector storage, retrieval, context construction and language model generation. future features future versions of documind may include conversation memory, streaming responses, retrieval evaluation, confidence scores, rate limiting and support for multiple language model providers.",
+            "answer": "Architecture The DocuMind pipeline consists of document loading, text chunking, embedding generation, vector storage, retrieval, context construction and language model generation.",
             "expected_keywords": [
                 "loading",
                 "chunking",
@@ -149,14 +159,16 @@
                 {
                     "filename": "test.txt",
                     "page": null,
-                    "chunk_id": 2,
-                    "distance": 0.8756504058837891
+                    "chunk_id": 1,
+                    "distance": 0.9212533235549927,
+                    "relevance": 7.874667644500732
                 },
                 {
                     "filename": "test.txt",
                     "page": null,
-                    "chunk_id": 1,
-                    "distance": 1.2012872695922852
+                    "chunk_id": 0,
+                    "distance": 1.0210304260253906,
+                    "relevance": 0
                 }
             ],
             "passed": true
@@ -165,7 +177,7 @@
             "id": 7,
             "question": "What technology is used for the DocuMind backend?",
             "type": "supported",
-            "answer": "development documind is being developed using python and fastapi for the backend and react with tailwind css for the frontend.",
+            "answer": "DocuMind is being developed using Python and FastAPI for the backend.",
             "expected_keywords": [
                 "Python",
                 "FastAPI"
@@ -174,14 +186,16 @@
                 {
                     "filename": "test.txt",
                     "page": null,
-                    "chunk_id": 2,
-                    "distance": 0.6596527099609375
+                    "chunk_id": 1,
+                    "distance": 1.1312894821166992,
+                    "relevance": 0
                 },
                 {
                     "filename": "test.txt",
                     "page": null,
                     "chunk_id": 0,
-                    "distance": 0.9347435235977173
+                    "distance": 1.2459158897399902,
+                    "relevance": 0
                 }
             ],
             "passed": true
@@ -190,7 +204,7 @@
             "id": 8,
             "question": "What technology is used for the DocuMind frontend?",
             "type": "supported",
-            "answer": "development documind is being developed using python and fastapi for the backend and react with tailwind css for the frontend.",
+            "answer": "DocuMind is being developed using React with Tailwind CSS for the frontend.",
             "expected_keywords": [
                 "React",
                 "Tailwind"
@@ -199,14 +213,16 @@
                 {
                     "filename": "test.txt",
                     "page": null,
-                    "chunk_id": 2,
-                    "distance": 0.7187024354934692
+                    "chunk_id": 1,
+                    "distance": 1.1312894821166992,
+                    "relevance": 0
                 },
                 {
                     "filename": "test.txt",
                     "page": null,
                     "chunk_id": 0,
-                    "distance": 1.0126776695251465
+                    "distance": 1.2459158897399902,
+                    "relevance": 0
                 }
             ],
             "passed": true
@@ -217,20 +233,7 @@
             "type": "unsupported",
             "answer": "I could not find this information in the uploaded documents.",
             "expected_keywords": [],
-            "sources": [
-                {
-                    "filename": "test.txt",
-                    "page": null,
-                    "chunk_id": 2,
-                    "distance": 0.8797563314437866
-                },
-                {
-                    "filename": "test.txt",
-                    "page": null,
-                    "chunk_id": 0,
-                    "distance": 1.208081841468811
-                }
-            ],
+            "sources": [],
             "passed": true
         },
         {
@@ -255,7 +258,7 @@
             "id": 12,
             "question": "What future features are planned for DocuMind?",
             "type": "supported",
-            "answer": "future features future versions of documind may include conversation memory, streaming responses, retrieval evaluation, confidence scores, rate limiting and support for multiple language model providers.",
+            "answer": "Future Features Future versions of DocuMind may include conversation memory, streaming responses, retrieval evaluation, confidence scores, rate limiting and support for multiple language model providers.",
             "expected_keywords": [
                 "conversation memory",
                 "streaming",
@@ -266,14 +269,16 @@
                 {
                     "filename": "test.txt",
                     "page": null,
-                    "chunk_id": 2,
-                    "distance": 0.6635828018188477
+                    "chunk_id": 1,
+                    "distance": 1.621644377708435,
+                    "relevance": 0
                 },
                 {
                     "filename": "test.txt",
                     "page": null,
                     "chunk_id": 0,
-                    "distance": 1.043459415435791
+                    "distance": 1.6715686321258545,
+                    "relevance": 0
                 }
             ],
             "passed": true

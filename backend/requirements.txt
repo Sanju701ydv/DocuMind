@@ -3,7 +3,7 @@ uvicorn[standard]
 python-multipart
 pypdf
 python-docx
-sentence-transformers
+scikit-learn
 chromadb
 openai
 python-dotenv
