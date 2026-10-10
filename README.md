@@ -1,88 +1,99 @@
 # 📚 DocuMind — RAG Document Chatbot
 
-An AI-powered document question-answering application that uses **Retrieval-Augmented Generation (RAG)** to answer questions based on uploaded documents.
+An AI-powered document question-answering application built with **Retrieval-Augmented Generation (RAG)** to answer questions using uploaded documents.
 
-🌐 **Live Demo:** [Open DocuMind](https://docu-mind-git-main-samjhana-s-projects.vercel.app/)  
-📖 **API Documentation:** [View FastAPI Docs](https://documind-backend-rl9a.onrender.com/docs)  
-💻 **GitHub:** [View Repository](https://github.com/Sanju701ydv/DocuMind)
+🌐 **[Live Demo](https://docu-mind-git-main-samjhana-s-projects.vercel.app/)** · 📖 **[API Documentation](https://documind-backend-rl9a.onrender.com/docs)** · 💻 **[GitHub Repository](https://github.com/Sanju701ydv/DocuMind)**
 
 ## ✨ Features
 
-- 📄 Upload PDF, DOCX, and TXT documents.
-- 🔍 Retrieve relevant document chunks using vector similarity search.
-- 💬 Ask questions about uploaded documents.
-- 📑 Display source references for retrieved content.
-- 🛡️ Reduce hallucinations with context-grounded answers and unsupported-question handling.
-- 🚫 Handle unrelated questions with guardrails.
-- 📊 Evaluate retrieval and answer quality using a test dataset.
-- 🗑️ Upload and delete documents through a responsive interface.
+* 📄 Upload PDF, DOCX, and TXT documents.
+* 🔍 Retrieve relevant document chunks using vector similarity search.
+* 💬 Ask natural-language questions about uploaded documents.
+* 📑 Display source references for retrieved content.
+* 🛡️ Reduce hallucinations with context-grounded answers.
+* 🚫 Handle unsupported and unrelated questions.
+* 📊 Evaluate retrieval and answer quality using a test dataset.
+* 🗑️ Upload and delete documents through a responsive interface.
 
 ## 🖼️ Screenshots
 
-### Main Interface
+### DocuMind — Main Interface
 
 ![DocuMind Main Interface](docs/screenshots/home.png)
 
+
+
 ## 🛠️ Tech Stack
 
-| Component | Technologies |
-|---|---|
-| Frontend | React, Vite, Tailwind CSS |
-| Backend | Python, FastAPI, Uvicorn |
-| Embeddings | Scikit-learn `HashingVectorizer` |
-| Vector Database | ChromaDB |
-| Document Processing | PyPDF, python-docx |
-| Deployment | Vercel, Render |
+| Component           | Technologies                   |
+| ------------------- | ------------------------------ |
+| Frontend            | React, Vite, Tailwind CSS      |
+| Backend             | Python, FastAPI, Uvicorn       |
+| Embeddings          | Scikit-learn HashingVectorizer |
+| Vector Database     | ChromaDB                       |
+| Document Processing | PyPDF, python-docx             |
+| Deployment          | Vercel, Render                 |
 
 ## 🏗️ Architecture
 
 ```text
-User
-  ↓
-React Frontend (Vercel)
-  ↓ REST API
-FastAPI Backend (Render)
-  ↓
-Document Loading → Text Chunking → Embeddings
-  ↓
-ChromaDB Vector Storage
-  ↓
-Similarity Search → Context Construction
-  ↓
-Grounded Answer + Sources
+              User
+               ↓
+       React Frontend
+           (Vercel)
+               ↓
+          REST API
+               ↓
+       FastAPI Backend
+           (Render)
+               ↓
+    Document Processing
+               ↓
+        Text Chunking
+               ↓
+     Embedding Generation
+               ↓
+          ChromaDB
+               ↓
+       Similarity Search
+               ↓
+     Context Construction
+               ↓
+     Grounded Answer
+       + Source References
 ```
 
 ## 🔄 How It Works
 
 1. Upload a PDF, DOCX, or TXT document.
-2. Extract text and divide it into overlapping chunks.
+2. Extract text and split it into overlapping chunks.
 3. Convert text chunks into numerical vectors.
 4. Store the vectors in ChromaDB.
-5. Retrieve relevant chunks when a question is asked.
-6. Generate an answer using the available context and return source references.
+5. Retrieve relevant chunks for each question.
+6. Generate a context-grounded answer and display source references.
 
 ## 📊 Evaluation
 
 The project includes 12 test questions covering retrieval, supported answers, unsupported questions, and off-topic handling.
 
-| Evaluation Metric | Result |
-|---|---:|
-| Retrieval evaluation | 100% |
-| Answer evaluation | 100% |
-| Test cases | 12 |
+| Metric               | Result |
+| -------------------- | -----: |
+| Retrieval evaluation |   100% |
+| Answer evaluation    |   100% |
+| Test cases           |     12 |
 
-*These results reflect the project's current test dataset and are not a guarantee of accuracy on all documents or questions.*
+*Results reflect the current test dataset and do not guarantee accuracy for every document or question.*
 
 ## 🚀 Run Locally
 
-### 1. Clone the Repository
+### 1. Clone the repository
 
-```powershell
+```bash
 git clone https://github.com/Sanju701ydv/DocuMind.git
 cd DocuMind
 ```
 
-### 2. Set Up the Backend
+### 2. Set up the backend
 
 ```powershell
 python -m venv .venv
@@ -91,7 +102,7 @@ cd backend
 pip install -r requirements.txt
 ```
 
-Create `backend/.env`:
+Create `backend/.env` with the following configuration:
 
 ```env
 LLM_PROVIDER=local
@@ -108,36 +119,36 @@ Start the backend:
 python -m uvicorn app.main:app --reload
 ```
 
-Backend: `http://127.0.0.1:8000`  
+Backend: `http://127.0.0.1:8000`
 API documentation: `http://127.0.0.1:8000/docs`
 
-### 3. Set Up the Frontend
+### 3. Set up the frontend
 
-Open another PowerShell terminal:
+Open a second terminal:
 
 ```powershell
-cd D:\DocuMind\frontend
+cd frontend
 npm install
 npm run dev
 ```
 
-Open `http://localhost:5173`.
+Open `http://localhost:5173` in your browser.
 
 ## ⚠️ Deployment Note
 
-The current deployment uses local document and ChromaDB storage. On cloud platforms with ephemeral filesystems, uploaded files and vector data may not persist across restarts or redeployments. Persistent storage is a future improvement.
+The current deployment uses local document and ChromaDB storage. On cloud platforms with ephemeral filesystems, uploaded files and vector data may not persist after restarts or redeployments. Persistent storage is a planned improvement.
 
 ## 🔮 Future Improvements
 
-- User authentication and document isolation
-- Persistent cloud storage
-- Streaming responses and conversation history
-- Advanced retrieval evaluation and confidence scoring
-- Support for additional LLM providers
+* User authentication and document isolation
+* Persistent cloud document and vector storage
+* Streaming responses and conversation history
+* Advanced retrieval evaluation and confidence scoring
+* Support for additional LLM providers
 
 ## 👩‍💻 Author
 
-**Samjhana Yadav**  
+**Samjhana Yadav**
 B.Tech — Computer Science & Engineering
 
 **Interests:** Generative AI · RAG Systems · Machine Learning · Data Analytics
