@@ -17,7 +17,7 @@ An AI-powered document question-answering application that uses **Retrieval-Augm
 * 📊 Evaluate retrieval and answer quality using a test dataset.
 * 🗑️ Upload and delete documents through a responsive interface.
 
-## 🖼️ Screenshots
+
 # 📚 DocuMind — RAG Document Chatbot
 
 An AI-powered document question-answering application that uses **Retrieval-Augmented Generation (RAG)** to answer questions based on uploaded documents.
@@ -38,24 +38,7 @@ An AI-powered document question-answering application that uses **Retrieval-Augm
 * 🗑️ Upload and delete documents through a responsive interface.
 
 ## 🖼️ Screenshots
-
-### 1. Main Interface
-
-![DocuMind Main Interface](docs/screenshots/home.png)
-
-### 2. Document Chat and Source References
-
-![DocuMind Document Chat](docs/screenshots/document-chat.png)
-
-### 3. Document Upload
-
-![DocuMind Document Upload](docs/screenshots/document-upload.png)
-
-### 4. API Documentation
-
-![DocuMind API Documentation](docs/screenshots/api-docs.png)
-
-> **Note:** Add your actual screenshots to `docs/screenshots/` using the filenames shown above.
+![Uploading Screenshot 2026-10-09 015718.png…]()
 
 ## 🛠️ Tech Stack
 
