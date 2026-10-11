@@ -16,12 +16,7 @@ An AI-powered document question-answering application built with **Retrieval-Aug
 * 🗑️ Upload and delete documents through a responsive interface.
 
 ## 🖼️ Screenshots
-
-### DocuMind — Main Interface
-
-![DocuMind Main Interface](docs/screenshots/home.png)
-
-
+<img width="1875" height="910" alt="home" src="https://github.com/user-attachments/assets/086ecb8d-8e38-4f78-bd43-e42759a2eb16" />
 
 ## 🛠️ Tech Stack
 
